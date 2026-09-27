@@ -1,6 +1,3 @@
+#include "Random.h"
 #include <iostream>
 
-int main()
-{
-	return 0;
-}

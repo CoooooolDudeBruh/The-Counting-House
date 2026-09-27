@@ -1,7 +1,29 @@
+#include "Io.h"
 #include <iostream>
 
-
-int main()
+namespace io
 {
-	return 0;
+	// Learncpp has not introduced error handling for std::string yet
+	std::string inputString()
+	{
+		std::string statement{};
+		std::cin >> statement;
+		
+		return statement;
+	}
+	// Will be implementing error handling soon
+	int inputInt()
+	{
+
+
+		return int;
+	}
+	// Will be implementing error handling soon
+	char inputChar()
+	{
+
+
+		return char;
+	}
+
 }
