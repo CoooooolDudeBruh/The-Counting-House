@@ -46,14 +46,14 @@ namespace io
 		{
 			// Three cases need to be handled: Normal, invalid, and boundary overflow
 			// Defined input
-			int input{};
+			int intVal{};
 			// Integrate while loop to handle invalid input and re-prompt user for input 
 			// Use break to exit once valid input is received
-			std::cin >> input;
+			std::cin >> intVal;
 
 
 			// clears the error fail bit, eof input, and buffer clear all in one function call
-			if (clearFailedExtraction());
+			if (clearFailedExtraction())
 			{
 				std::cout << "Enter a valid integer" << '\n';
 				continue;
@@ -61,15 +61,28 @@ namespace io
 			// buffer clear in case of input like "1abc" not for "abc1"
 			ignoreLine();
 
-			return input;
+			return intVal;
 		}
 	}
-	// Will be implementing error handling soon
+	// Will see if 
 	char inputChar()
 	{
-		char charVal{};
+		// All running in a while loop 
+		while (true)
+		{
+			// Deine char value used for input 
+			char charVal{};
 
-		return charVal;
+			if (clearFailedExtraction())
+			{
+				std::cout << "Enter a valid character" << '\n';
+				continue;
+			}
+			// always clear the buffer 
+			ignoreLine();
+
+			return charVal;
+		}
 	}
 
 }
