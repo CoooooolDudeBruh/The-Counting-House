@@ -1,5 +1,6 @@
 #include "Io.h"
 #include <iostream>
+#include <limits>
 
 namespace io
 {
@@ -7,6 +8,27 @@ namespace io
 	void ignoreLine()
 	{
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	}
+
+	// Additional function for if EOF value has been entered and incorporate failed extraction due to type mismatch
+	bool clearFailedExtraction()
+	{
+		// checked for failed extraction
+		if (!std::cin)
+		{
+			// check eof first in order to prioritize program termination
+			if (std::cin.eof())
+			{
+				std::exit(0);
+			}
+			// clears error fail bit
+			std::cin.clear();
+			ignoreLine();
+			// True for failure in extraction
+			return true;
+		}
+
+		return false;
 	}
 
 	// Learncpp has not introduced error handling for std::string yet
@@ -29,22 +51,16 @@ namespace io
 			// Use break to exit once valid input is received
 			std::cin >> input;
 
-			// Input validation
-			if (!std::cin)
+
+			// clears the error fail bit, eof input, and buffer clear all in one function call
+			if (clearFailedExtraction());
 			{
-				// clears the error fail bit
-				std::cin.clear();
-				// clears the buffer of any extraneous input
-				ignoreLine();
-				// "continue" to loop around the while loop
+				std::cout << "Enter a valid integer" << '\n';
 				continue;
 			}
-
-
 			// buffer clear in case of input like "1abc" not for "abc1"
 			ignoreLine();
 
-			std::cin >> input;
 			return input;
 		}
 	}

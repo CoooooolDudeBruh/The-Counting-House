@@ -6,10 +6,14 @@
 #include <string>
 // My guess was correct
 
-std::string inputString();
-int inputInt();
-char inputChar();
+// Forward declarations must be inthe same namespace 
 
+namespace io
+{
+	std::string inputString();
+	int inputInt();
+	char inputChar();
+}
 
 
 
