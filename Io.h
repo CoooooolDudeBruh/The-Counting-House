@@ -6,8 +6,7 @@
 #include <string>
 // My guess was correct
 
-// Forward declarations must be inthe same namespace 
-
+// Forward declarations must be in the same namespace (namespace all in lowercase like learncpp suggests)
 namespace io
 {
 	std::string inputString();
