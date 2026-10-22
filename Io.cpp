@@ -74,6 +74,8 @@ namespace io
 		{
 			// Deine char value used for input 
 			char charVal{};
+			// Ask for the input
+			std::cin >> charVal;
 
 			if (clearFailedExtraction())
 			{
