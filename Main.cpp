@@ -44,14 +44,13 @@ int main()
 
 	// Ask for player name (not sure if its worth implementing a call for std::getline in io.cpp)
 	// definition/default-initialization
-	/*
+#if 0
 	std::cout << "Enter Player name: ";
 	std::string playerName;
 	// Getline 
 	std::getline(std::cin, playerName);
 	std::cout << "Player Name is " << playerName << " is this correct?\n";
-	*/
-	/*
+	
 	// Decision is zero initialized so it can be used later
 	char decision{};
 	while (true)
@@ -62,7 +61,7 @@ int main()
 			break;
 		std::cout << '\n';
 	}
-	*/
+#endif
 	// Starting values
 	int gold = constants::startingGold;
 	std::string difficulty{ "Easy" };
@@ -79,8 +78,30 @@ int main()
 			std::cout << "1) Bullseye" << '\n' << "2) Over/Under" << '\n' << "3) Double or Nothing";
 			std::cout << "4) Show ledger" << '\n' << "5) Change difficulty" << '\n' << "6) Quit";
 
-
-			switch ()
+			char choice{ io::inputChar() };
+			switch (choice)
+			{
+			case 1:
+				//bullseye();
+				break;
+			case 2:
+				//overUnder();
+				break;
+			case 3:
+				//doubleOrNothing();
+				break;
+			case 4:
+				//showLedger();
+				break;
+			case 5:
+				//changeDifficulty();
+				break;
+			case 6:
+				iWannaLeave = true;
+				break;
+			default:
+				continue;
+			}
 		}
 
 	}
