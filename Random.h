@@ -1,1 +1,5 @@
-#pragma once
+#ifndef Random
+#define Random
+
+
+#endif
