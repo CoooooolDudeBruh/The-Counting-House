@@ -64,7 +64,9 @@ namespace io
 			return intVal;
 		}
 	}
-	// Will see if 
+	// Will see if input validation is needed in this implementation perhaps if there is different
+	// cases where its needed I will implement while loop on the caller side unless there is only one 
+	// case then it will be added here
 	char inputChar()
 	{
 		// All running in a while loop 

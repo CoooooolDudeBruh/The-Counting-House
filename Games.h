@@ -1,5 +1,5 @@
 #ifndef GAMES
-#define Games
+#define GAMES
 
 
 
