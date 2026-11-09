@@ -15,8 +15,7 @@ namespace random
 		// class/object |  object/variable | rd object is a functor
 		std::random_device rd;
 
-		std::seed_seq ss
-		{
+		std::seed_seq ss {
 			// Three different clocks used to seed the mersenne twister
 			static_cast<std::seed_seq::result_type>(
 				std::chrono::high_resolution_clock::now().time_since_epoch().count()),
@@ -36,7 +35,7 @@ namespace random
 		return std::mt19937{ ss };
 	}
 
-	// The single global engine used by everything in this header.
+	// The single global engine used by everything in this header. This is a definition.
 	// 'inline' lets us define it in a header without linker errors.
 	inline std::mt19937 mt{ generate() };
 
