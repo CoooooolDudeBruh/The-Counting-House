@@ -8,28 +8,28 @@ std::string getName()
 {
 	std::cout << "Enter Player name: ";
 	std::string playerName;
-	// Getline 
+	// Getline for player name to allow for spaces in name
 	std::getline(std::cin, playerName);
 	std::cout << "Player Name is " << playerName << " is this correct?\n";
 	return playerName;
 }
 std::string getNameAndCheck()
 {
-	std::string playerName{ getName() };
-	char decision{};
 	while (true)
 	{
-		std::cout << "(y/n) :";
-		decision = io::inputChar();
-		if (decision == 'y')
-			break;
-		if (decision == 'n')
-			break;
+		std::string playerName{ getName() };
+		while (true)
+		{
+			char decision{};
+			std::cout << "(y/n) :";
+			decision = io::inputChar();
+			if (decision == 'y')
+				return playerName;
+			if (decision == 'n')
+				break;
+		}
 	}
-	return playerName;
 }
-
-
 
 int main()
 {
@@ -47,7 +47,7 @@ int main()
 #if 0
 	std::cout << "Enter Player name: ";
 	std::string playerName;
-	// Getline 
+	// Getline for player name to allow for spaces in name
 	std::getline(std::cin, playerName);
 	std::cout << "Player Name is " << playerName << " is this correct?\n";
 	
@@ -62,6 +62,8 @@ int main()
 		std::cout << '\n';
 	}
 #endif
+
+
 	// Starting values
 	int gold = constants::startingGold;
 	std::string difficulty{ "Easy" };
