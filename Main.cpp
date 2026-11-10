@@ -3,6 +3,8 @@
 #include <iostream>
 #include <cassert>
 #include <string>
+#define BROKE_FLAG 0
+
 
 std::string getName()
 {
@@ -49,11 +51,11 @@ std::string getDifficulty()
 		// Use switch statement
 		switch (difficulty)
 		{
-		case 1:
+		case '1':
 			return "Easy";
-		case 2:
+		case '2':
 			return "Medium";
-		case 3: 
+		case '3': 
 			return "Hard";
 		default:
 			std	::cout << "Invalid Difficulty, Please enter a valid difficulty: (1) Easy, (2) Medium, (3) Hard\n";
@@ -61,7 +63,9 @@ std::string getDifficulty()
 	}
 }
 
-void ledgerView(std::string_view playerName, std::string_view difficulty, int gold, char gamesPlayed, char gamesWon, char gamesLost, char currentStreak, char bestStreak, char largestPayout)
+// TODO: Fix ledger numbers and implement real values and calculations for net profit, games played, games won, games lost, current streak, best streak, and largest payout.
+
+void ledgerView(std::string_view playerName, std::string_view difficulty, int gold, int gamesPlayed, int gamesWon, int gamesLost, int currentStreak, int bestStreak, int largestPayout)
 {
 	// Name, Difficulty, Gold, Net Profit (gold - starting gold), Games Played, Games Won, Games Lost, Current Streak, Best Streak, Largest Payout
 	// Mention lack of Data if no games have been played yet, and that the ledger will be updated after each game played.
@@ -79,21 +83,17 @@ void ledgerView(std::string_view playerName, std::string_view difficulty, int go
 	while (true)
 	{
 		std::cout << "Return to Menu? (y/n): ";
-		char deicision{ io::inputChar() };
-		if (deicision == 'y')
+		char decision{ io::inputChar() };
+		if (decision == 'y')
 		{
 			break;
 		}
-		if (deicision == 'n')
+		if (decision == 'n')
 		{
 			continue;
 		}
 	}
-	std::cout << "Returning to Menu...\n";
-	for (int i = 0; i < 50; i++)
-		{
-			std::cout << "...\n";
-		}
+	std::cout << "\nReturning to Menu...\n\n";
 }
 
 
@@ -101,6 +101,8 @@ int main()
 {
 	// Exit bool zero initialized to false.
 	bool iWannaLeave{};
+	// Went broke bool zero initialized to false.
+	bool wentBroke{};
 	// Beginning while loop.
 
 	std::cout << "The Counting House" << '\n'
@@ -114,20 +116,35 @@ int main()
 	std::string difficulty{ "Easy" };
 	std::string playerName{ getNameAndCheck() };
 	// Assuming small number of games played
-	char gamesPlayed{};
-	char gamesWon{};
-	char gamesLost{};
-	char currentStreak{};
-	char bestStreak{};
-	char largestPayout{};
+	int gamesPlayed{};
+	int gamesWon{};
+	int gamesLost{};
+	int currentStreak{};
+	int bestStreak{};
+	int largestPayout{};
 
-	// Beginning while loop with exit condition of iWannaLeave being true, which is set to true when the player chooses to leave the counting house.
-	while (!iWannaLeave)
+#if BROKE_FLAG		// Check if player has run out of gold, if so set wentBroke to true
+	if (playerName == "Ada Lovelace")
+	{
+		gold = 0;
+	}
+#endif
+
+	// Beginning while loop with exit condition of iWannaLeave being true and wentBroke being true, which is set to true when the player chooses to leave the counting house.
+	while (!iWannaLeave && !wentBroke)
 	{
 		// somehow we need to trip the player back to this loop after finishing their game
-
+		// Maybe outer loop not needed as inner will provide the concurrent menu and lead to gameplay and restart the loop after finish
 		while (true)
 		{
+			// Check if player has run out of gold, if so set wentBroke to true and break out of the loop at the beginning
+			if (gold <= 0)
+			{
+				wentBroke = true;
+				std::cout << "You have run out of gold, you are leaving the counting house." << '\n';
+				break;
+			}
+
 			// Display Menu with given player name, gold, and difficulty.
 			std::cout << "The Counting House" << '\n';
 			std::cout << "Player: " << playerName << "\tGold: " << gold << "\tDifficulty: " << difficulty << '\n';
@@ -160,6 +177,11 @@ int main()
 				break;
 			default:
 				continue;
+			}
+			// If the player has chosen to leave, break out of the loop and exit the program.
+			if (iWannaLeave)
+			{
+				break;
 			}
 		}
 
