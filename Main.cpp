@@ -1,5 +1,6 @@
 #include "Constants.h"
 #include "Io.h"
+#include "Games.h"
 #include <iostream>
 #include <cassert>
 #include <string>
@@ -137,6 +138,12 @@ int main()
 		// Maybe outer loop not needed as inner will provide the concurrent menu and lead to gameplay and restart the loop after finish
 		while (true)
 		{
+			// gamewon streak tallier post game exit and rerun of loop
+			if (gamesWon > bestStreak)
+			{
+				bestStreak = gamesWon;
+			}
+
 			// Check if player has run out of gold, if so set wentBroke to true and break out of the loop at the beginning
 			if (gold <= 0)
 			{
@@ -158,18 +165,22 @@ int main()
 			switch (choice)
 			{
 			case '1':
+				gamesPlayed++;
 				//bullseye();
 				break;
 			case '2':
+				gamesPlayed++;
 				//overUnder();
 				break;
 			case '3':
-				//doubleOrNothing();
+				gamesPlayed++;
+				doubleOrNothing(gold);
 				break;
 			case '4':
 				ledgerView(playerName, difficulty, gold, gamesPlayed, gamesWon, gamesLost, currentStreak, bestStreak, largestPayout);
 				break;
 			case '5':
+				
 				difficulty = getDifficulty();
 				break;
 			case '6':
