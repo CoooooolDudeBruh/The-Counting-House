@@ -72,8 +72,10 @@ namespace io
 		// All running in a while loop 
 		while (true)
 		{
-			// Deine char value used for input 
+			// Define char value used for input 
 			char charVal{};
+			// Ask for the input
+			std::cin >> charVal;
 
 			if (clearFailedExtraction())
 			{
