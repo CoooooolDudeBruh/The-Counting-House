@@ -9,21 +9,6 @@
 // and progress in the counting house.
 // ==============================================================================
 
-int returnGold(int gold)
-{
-	return gold;
-}
-
-int gamesWon(int gamesWon)
-{
-	return gamesWon + 1;
-}
-
-int gamesLost(int gamesLost)
-{
-	return gamesLost + 1;
-}
-
 
 
 
@@ -31,9 +16,18 @@ int gamesLost(int gamesLost)
 
 // First game development Cycle, Double or Nothing
 // Not dependent on difficulty, but will be dependent on wager amount and current gold amount
-void doubleOrNothing(int gold)
+// splitting this funciton up to many to grab the specific values for gold, games played, games won, games lost, current streak, best streak, and largest payout.
+
+int askBetDoubleOrNothing(int gold)
 {
+	std::cout << "Welcome to Double or Nothing!" << '\n';
+	std::cout << "In this game, you will wager an amount of gold and flip a coin." << '\n';
+	std::cout << "If the coin lands on heads, you win double your wager." << '\n';
+	std::cout << "If the coin lands on tails, you lose your wager." << '\n';
+	std::cout << "You can play as many times as you want, but be careful not to run out of gold!" << '\n';
 	
+
+	// Bool for gameplay loop stop condition, set to true to start the loop
 	bool keepPlaying{ true };
 	while (keepPlaying)
 	{
@@ -58,19 +52,28 @@ void doubleOrNothing(int gold)
 
 		std::cout << "Your wager is: " << wager << " gold." << '\n';
 
+
+
+}
+
+
+
+
+int doubleOrNothing(int gold, int wager)
+{
+	// function gold var used for in function calculations to be returned at loop end
+
 		// Generated number on the spot, if the number is even, the player wins and their gold is doubled, if the number is odd, the player loses and their gold is halved.
 		int randomNumber{ random::get(1, 100) };
 		// Even check else for odd check
 		if (randomNumber % 2 == 0)
 		{
 			gold += (wager+wager);
-			returnGold(gold);
 			std::cout << "You won! Your gold has been doubled" << '\n';
 		}
 		else
 		{
 			gold -= wager;
-			returnGold(gold);
 			std::cout << "You lost! Your gold has been halved" << '\n';
 		}
 
@@ -89,9 +92,5 @@ void doubleOrNothing(int gold)
 			std::cout << "Invalid input, please enter y or n." << '\n';
 			continue;
 		}
-	}
-	
-
-
-
+	return gold;
 }

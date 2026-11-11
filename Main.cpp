@@ -97,6 +97,10 @@ void ledgerView(std::string_view playerName, std::string_view difficulty, int go
 	std::cout << "\nReturning to Menu...\n\n";
 }
 
+// Helper function that runs double or nothing game, returns gold, returns number of games played, number of games won, number of games lost, current streak, best streak, and largest payout.
+// lets move this helper to game.cpp
+
+
 
 int main()
 {
@@ -173,8 +177,20 @@ int main()
 				//overUnder();
 				break;
 			case '3':
-				gamesPlayed++;
-				doubleOrNothing(gold);
+				// Loop here for local gold +- wager outcome, game won, game lost, current streak, best streak, largest payout, and games played. Return to menu after game exit.
+				while (keepPlaying)
+				{
+					gamesPlayed++;
+					int wager{ askBetDoubleOrNothing(gold) };
+					
+
+					gold = doubleOrNothing(gold, wager);
+
+
+
+
+
+				}
 				break;
 			case '4':
 				ledgerView(playerName, difficulty, gold, gamesPlayed, gamesWon, gamesLost, currentStreak, bestStreak, largestPayout);

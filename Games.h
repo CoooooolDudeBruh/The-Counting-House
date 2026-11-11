@@ -1,8 +1,8 @@
 #ifndef GAMES
 #define GAMES
 
-void doubleOrNothing(int);
+int doubleOrNothing(int, int);
 
-
+int askBetDoubleOrNothing(int);
 
 #endif
