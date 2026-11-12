@@ -6,6 +6,8 @@
 #include <string>
 #define BROKE_FLAG 0
 
+// TODO: Add Asserts, Static Asserts, Use more Auto for type deduction, Typedef (using) name aliases.
+
 
 std::string getName()
 {
@@ -128,6 +130,7 @@ int main()
 	int bestStreak{};
 	int largestPayout{};
 
+
 #if BROKE_FLAG		// Check if player has run out of gold, if so set wentBroke to true
 	if (playerName == "Ada Lovelace")
 	{
@@ -143,9 +146,9 @@ int main()
 		while (true)
 		{
 			// gamewon streak tallier post game exit and rerun of loop
-			if (gamesWon > bestStreak)
+			if (currentStreak > bestStreak)
 			{
-				bestStreak = gamesWon;
+				bestStreak = currentStreak;
 			}
 
 			// Check if player has run out of gold, if so set wentBroke to true and break out of the loop at the beginning
@@ -178,18 +181,29 @@ int main()
 				break;
 			case '3':
 				// Loop here for local gold +- wager outcome, game won, game lost, current streak, best streak, largest payout, and games played. Return to menu after game exit.
-				while (keepPlaying)
+				// Impelementation for streak is not yet done
+				while (true)
 				{
 					gamesPlayed++;
 					int wager{ askBetDoubleOrNothing(gold) };
 					
+					int gameOutcomeUpdateGoldAmount	{ doubleOrNothing(gold, wager) };
+					if (gameOutcomeUpdateGoldAmount > gold)
+					{
+						currentStreak += 1;
+						++gamesWon;
+					}
+					else
+					{
+						currentStreak = 0;
+						++gamesLost;
+					}
+					gold = gameOutcomeUpdateGoldAmount;
+					if (!keepPlayingCheck())
+					{
 
-					gold = doubleOrNothing(gold, wager);
-
-
-
-
-
+						break;
+					}
 				}
 				break;
 			case '4':
