@@ -373,6 +373,3 @@ cmake_install.cmake
 
 # Machine-specific VS Code IntelliSense paths
 .vscode/c_cpp_properties.json
-
-# instructions for ai commit messages
-commit-messages.instructions.md
