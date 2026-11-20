@@ -5,7 +5,7 @@
 #include <random>
 
 // namepsace used for random number generation
-namespace random
+namespace prng
 {
 
 	// inline (for ODR collisions) std:mt19937 -> (class/type) generate -> (function name)

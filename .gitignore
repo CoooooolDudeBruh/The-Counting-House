@@ -361,3 +361,18 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# --- CMake / Linux g++ / VS Code additions ---
+build/
+*.o
+*.out
+compile_commands.json
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+
+# Machine-specific VS Code IntelliSense paths
+.vscode/c_cpp_properties.json
+
+# instructions for ai commit messages
+commit-messages.instructions.md

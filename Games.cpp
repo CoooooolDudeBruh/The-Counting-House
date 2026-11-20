@@ -53,7 +53,7 @@ int askBetDoubleOrNothing(int gold)
 		// function gold var used for in function calculations to be returned at loop end
 
 			// Generated number on the spot, if the number is even, the player wins and their gold is doubled, if the number is odd, the player loses and their gold is halved.
-		int randomNumber{ random::get(1, 100) };
+		int randomNumber{ prng::get(1, 100) };
 		// Even check else for odd check
 		if (randomNumber % 2 == 0)
 		{
