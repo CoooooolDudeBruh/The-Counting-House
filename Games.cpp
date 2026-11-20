@@ -63,7 +63,7 @@ int askBetDoubleOrNothing(int gold)
 		else
 		{
 			gold -= wager;
-			std::cout << "You lost! Your gold has been halved" << '\n';
+			std::cout << "You lost! Your gold is lost" << '\n';
 		}
 
 		std::cout << "Your gold amount is: " << gold << '\n';

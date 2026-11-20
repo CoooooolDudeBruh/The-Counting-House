@@ -7,6 +7,7 @@
 #define BROKE_FLAG 0
 
 // TODO: Add Asserts, Static Asserts, Use more Auto for type deduction, Typedef (using) name aliases.
+// TODO: Add more comments, check to make sure ledger tracking correct for first game
 
 
 std::string getName()
@@ -199,9 +200,9 @@ int main()
 						++gamesLost;
 					}
 					gold = gameOutcomeUpdateGoldAmount;
-					if (!keepPlayingCheck())
+					// Left sided check for gold in order to short circuit evaluation and not call keepPlayingCheck() if gold is less than or equal to 0, which would be a waste of time and resources.
+					if ((gold <= 0) || !keepPlayingCheck())
 					{
-
 						break;
 					}
 				}
