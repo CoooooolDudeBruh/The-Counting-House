@@ -152,6 +152,12 @@ int main()
 				bestStreak = currentStreak;
 			}
 
+			// Check if largest payout is less than current gold, if so set largest payout to current gold
+			if (gold > largestPayout)
+			{
+				largestPayout = gold;
+			}
+
 			// Check if player has run out of gold, if so set wentBroke to true and break out of the loop at the beginning
 			if (gold <= 0)
 			{
