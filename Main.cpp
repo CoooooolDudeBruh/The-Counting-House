@@ -8,7 +8,7 @@
 
 // TODO: Add Asserts, Static Asserts, Use more Auto for type deduction, Typedef (using) name aliases.
 // TODO: Add more comments, check to make sure ledger tracking correct for first game
-
+// TODO: Fix Ledger bestpayout tracking it is currently in progress
 
 std::string getName()
 {
@@ -130,6 +130,8 @@ int main()
 	int currentStreak{};
 	int bestStreak{};
 	int largestPayout{};
+	int previousGold{};
+	int currentPayout{};
 
 
 #if BROKE_FLAG		// Check if player has run out of gold, if so set wentBroke to true
@@ -146,17 +148,18 @@ int main()
 		// Maybe outer loop not needed as inner will provide the concurrent menu and lead to gameplay and restart the loop after finish
 		while (true)
 		{
+			
+
 			// gamewon streak tallier post game exit and rerun of loop
 			if (currentStreak > bestStreak)
 			{
 				bestStreak = currentStreak;
 			}
 
-			// Check if largest payout is less than current gold, if so set largest payout to current gold
-			if (gold > largestPayout)
-			{
-				largestPayout = gold;
-			}
+			// Create compare val that will be assigned previous gold value to compare to current gold value after game exit, if current gold is greater than previous gold, then assign current gold to largest payout.
+			
+			previousGold = gold;
+			
 
 			// Check if player has run out of gold, if so set wentBroke to true and break out of the loop at the beginning
 			if (gold <= 0)
