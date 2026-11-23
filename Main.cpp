@@ -6,9 +6,8 @@
 #include <string>
 #define BROKE_FLAG 0
 
-// TODO: Add Asserts, Static Asserts, Use more Auto for type deduction, Typedef (using) name aliases.
-// TODO: Add more comments, check to make sure ledger tracking correct for first game
-// TODO: Fix Ledger bestpayout tracking it is currently in progress
+// TODO: Add more comments, Add Asserts, Static Asserts, Use more Auto for type deduction, Typedef (using) name aliases.
+// TODO: Add additional Games and their respective logic
 
 std::string getName()
 {
