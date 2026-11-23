@@ -129,7 +129,7 @@ int main()
 	int currentStreak{};
 	int bestStreak{};
 	int largestPayout{};
-	int previousGold{};
+	int previousGold{constants::startingGold};
 
 
 #if BROKE_FLAG		// Check if player has run out of gold, if so set wentBroke to true
@@ -149,9 +149,10 @@ int main()
 			
 
 			// Check prior to previous gold value assigment to current gold in order to assign the largest
-			if (gold > previousGold)
+			int currentPayout {gold - previousGold};
+			if (currentPayout > largestPayout)
 			{
-				largestPayout = gold-previousGold;
+				largestPayout = currentPayout;
 			}
 
 			// gamewon streak tallier post game exit and rerun of loop
