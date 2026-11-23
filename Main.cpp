@@ -1,10 +1,13 @@
 #include "Constants.h"
 #include "Io.h"
+#include "Games.h"
 #include <iostream>
 #include <cassert>
 #include <string>
 #define BROKE_FLAG 0
 
+// TODO: Add more comments, Add Asserts, Static Asserts, Use more Auto for type deduction, Typedef (using) name aliases.
+// TODO: Add additional Games and their respective logic
 
 std::string getName()
 {
@@ -96,6 +99,10 @@ void ledgerView(std::string_view playerName, std::string_view difficulty, int go
 	std::cout << "\nReturning to Menu...\n\n";
 }
 
+// Helper function that runs double or nothing game, returns gold, returns number of games played, number of games won, number of games lost, current streak, best streak, and largest payout.
+// lets move this helper to game.cpp
+
+
 
 int main()
 {
@@ -122,6 +129,8 @@ int main()
 	int currentStreak{};
 	int bestStreak{};
 	int largestPayout{};
+	int previousGold{constants::startingGold};
+
 
 #if BROKE_FLAG		// Check if player has run out of gold, if so set wentBroke to true
 	if (playerName == "Ada Lovelace")
@@ -137,6 +146,26 @@ int main()
 		// Maybe outer loop not needed as inner will provide the concurrent menu and lead to gameplay and restart the loop after finish
 		while (true)
 		{
+			
+
+			// Check prior to previous gold value assigment to current gold in order to assign the largest
+			int currentPayout {gold - previousGold};
+			if (currentPayout > largestPayout)
+			{
+				largestPayout = currentPayout;
+			}
+
+			// gamewon streak tallier post game exit and rerun of loop
+			if (currentStreak > bestStreak)
+			{
+				bestStreak = currentStreak;
+			}
+
+			// Create compare val that will be assigned previous gold value to compare to current gold value after game exit, if current gold is greater than previous gold, then assign current gold to largest payout.
+			
+			previousGold = gold;
+			
+
 			// Check if player has run out of gold, if so set wentBroke to true and break out of the loop at the beginning
 			if (gold <= 0)
 			{
@@ -158,18 +187,45 @@ int main()
 			switch (choice)
 			{
 			case '1':
+				gamesPlayed++;
 				//bullseye();
 				break;
 			case '2':
+				gamesPlayed++;
 				//overUnder();
 				break;
 			case '3':
-				//doubleOrNothing();
+				// Loop here for local gold +- wager outcome, game won, game lost, current streak, best streak, largest payout, and games played. Return to menu after game exit.
+				// Impelementation for streak is not yet done
+				while (true)
+				{
+					gamesPlayed++;
+					int wager{ askBetDoubleOrNothing(gold) };
+					
+					int gameOutcomeUpdateGoldAmount	{ doubleOrNothing(gold, wager) };
+					if (gameOutcomeUpdateGoldAmount > gold)
+					{
+						currentStreak += 1;
+						++gamesWon;
+					}
+					else
+					{
+						currentStreak = 0;
+						++gamesLost;
+					}
+					gold = gameOutcomeUpdateGoldAmount;
+					// Left sided check for gold in order to short circuit evaluation and not call keepPlayingCheck() if gold is less than or equal to 0, which would be a waste of time and resources.
+					if ((gold <= 0) || !keepPlayingCheck())
+					{
+						break;
+					}
+				}
 				break;
 			case '4':
 				ledgerView(playerName, difficulty, gold, gamesPlayed, gamesWon, gamesLost, currentStreak, bestStreak, largestPayout);
 				break;
 			case '5':
+				
 				difficulty = getDifficulty();
 				break;
 			case '6':
