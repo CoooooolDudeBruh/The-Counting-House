@@ -88,5 +88,5 @@ bool keepPlayingCheck()
 
 int askBetBullseye(int gold)
 {
-	
+	return 0;
 }
